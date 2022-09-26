@@ -27,8 +27,9 @@ pipeline {
     stage('Deploying App host') {
       steps {
         sh 'sudo docker ps'
-        sh 'sudo docker stop apphost'
-        sh 'sudo docker rm apphost'
+        //sh 'sudo docker stop apphost'
+        //sh 'sudo docker rm apphost'
+        sh 'docker ps -q -f status=exited | xargs --no-run-if-empty docker rm'
         sh 'sudo docker run -itd --name apphost -p 8080:8081 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
       }
     }
