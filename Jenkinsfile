@@ -27,13 +27,13 @@ pipeline {
     stage('Check Docker continer') {
       steps {
         sh 'sudo docker ps'
-        sh 'sudo docker run -itd --name ${BUILD_NUMBER} -p 8080:8081 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
+        sh 'sudo docker run -itd --name apphost -p 8080:8081 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
       }
     }
   }
     post {
     always {
-      sh 'sudo docker stop ${BUILD_NUMBER}'
+      sh 'sudo docker stop apphost'
     }
   }
 }
