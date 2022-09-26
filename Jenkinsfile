@@ -18,8 +18,8 @@ pipeline {
             sh 'sudo docker build -t c3-courseproject .'
             sh 'sudo docker tag c3-courseproject:latest 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
             sh 'sudo docker push 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
-        //    sh 'sudo docker build . -t 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseprojec:${BUILD_NUMBER}'
-         //   sh 'sudo docker push 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseprojec:${BUILD_NUMBER}'
+        //    sh 'sudo docker build . -t 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
+         //   sh 'sudo docker push 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
           }
         }
       }
@@ -27,7 +27,13 @@ pipeline {
     stage('Check Docker continer') {
       steps {
         sh 'sudo docker ps'
+        sh 'sudo docker run -itd --name ${BUILD_NUMBER} -p 8080:8081 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
       }
+    }
+    post {
+    always {
+      
+      sh 'sudo docker stop ${BUILD_NUMBER}'
     }
   }
 }
