@@ -24,16 +24,13 @@ pipeline {
         }
       }
     }
-    stage('Check Docker continer') {
+    stage('Deploying App host') {
       steps {
         sh 'sudo docker ps'
+        sh 'sudo docker stop apphost'
+        sh 'sudo docker rm apphost
         sh 'sudo docker run -itd --name apphost -p 8080:8081 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
       }
-    }
-  }
-    post {
-    always {
-      sh 'sudo docker stop apphost'
     }
   }
 }
