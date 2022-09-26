@@ -24,5 +24,10 @@ pipeline {
         }
       }
     }
+    stage('Check Docker continer') {
+      steps {
+        sh 'sudo docker ps'
+      }
+    }
   }
 }
