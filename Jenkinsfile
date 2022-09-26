@@ -30,11 +30,10 @@ pipeline {
         sh 'sudo docker run -itd --name ${BUILD_NUMBER} -p 8080:8081 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseproject:${BUILD_NUMBER}'
       }
     }
+  }
     post {
     always {
-      
       sh 'sudo docker stop ${BUILD_NUMBER}'
     }
   }
-}
 }
