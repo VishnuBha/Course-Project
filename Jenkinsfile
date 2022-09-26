@@ -13,7 +13,7 @@ pipeline {
       parallel {
         stage('Build Docker Image') {
           steps {
-            sh 'cd vote && sudo docker build . -t 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseprojec:${BUILD_NUMBER}'
+            sh 'cd Course-Project && sudo docker build . -t 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseprojec:${BUILD_NUMBER}'
             sh 'sudo docker push 339837189061.dkr.ecr.us-east-1.amazonaws.com/c3-courseprojec:${BUILD_NUMBER}'
           }
         }
